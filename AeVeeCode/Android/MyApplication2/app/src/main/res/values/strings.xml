@@ -6,6 +6,7 @@
     <string name="register">register</string>
     <string name="create_account">Create Account</string>
     <string name="name">Name</string>
+    <string name="usrName">User Name</string>
     <string name="surname">Surname</string>
     <string name="email">Email Adress</string>
     <string name="password">Password</string>
@@ -13,4 +14,8 @@
     <string name="city">City</string>
     <string name="province">Province</string>
     <string name="code">Code</string>
+    <string name="registerQuoute"> If you do not have ?</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

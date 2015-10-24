@@ -1,16 +1,26 @@
 package com.aevee.elementcode.user;
 
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+
+    ListView lst;
+    ArrayList<String> temp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.edit_list);
+
     }
 
     @Override
@@ -18,6 +28,30 @@ public class MainActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+    public void TransAct(int d)
+    {
+        Fragment newFrag=null;
+        if(d==0)
+        {
+         newFrag= new login();
+        }
+        else if(d==1)
+        {
+
+        }
+        else if(d==2)
+        {
+
+        }
+        else if(d==3)
+        {
+
+        }
+        android.support.v4.app.FragmentTransaction trans=getSupportFragmentManager().beginTransaction();
+      //  trans.replace(R.id.Frame,newFrag);
+        trans.addToBackStack(null);
     }
 
     @Override

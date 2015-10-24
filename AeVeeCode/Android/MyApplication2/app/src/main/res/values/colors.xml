@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color  name="primaryColor">#06f8eb</color>
-    <color  name="primaryColorDarker">#06cbc0</color>
-    <color  name="accentColor">#0000ff</color>
-    <color  name="primaryColorTrans">#D906cbc0</color>
-    <color  name="accentColorTrans">#D90000ff</color>
+    <color  name="primaryColor">#009688</color>
+    <color  name="primaryColorDarker">#00796b</color>
+    <color  name="accentColor">#af15c0</color>
     <color  name="textColor">#000</color>
     <color  name="backgroundColor">#EEE</color>
+    <color  name="primaryColorTrans">#D9009688</color>
+    <color  name="accentColorTrans">#D91565c0</color>
    <!--Colors -->
     <color name="blue">#0000ff</color>
     <color name="red">#ff0000</color>
