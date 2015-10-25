@@ -5,12 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
@@ -19,6 +19,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.PlaceBuffer;
 import com.google.android.gms.location.places.PlaceLikelihood;
 import com.google.android.gms.location.places.PlaceLikelihoodBuffer;
 import com.google.android.gms.location.places.Places;
@@ -34,13 +35,26 @@ public class  GoogleMapObj extends AppCompatActivity implements
     public GoogleApiClient mGoogleApiClient;
     int PLACE_PICKER_REQUEST=1;
     String TAG="P";
-    TextView text,text2;
-
+    TextView text;
+    private AutoCompleteAdapter mAdapter;
+    private AutoCompleteTextView mPredictTextView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map_object);
         text=(TextView) findViewById(R.id.textView);
+        mPredictTextView = (AutoCompleteTextView) findViewById( R.id.predicttextview );
+        mAdapter = new AutoCompleteAdapter( this );
+        mPredictTextView.setAdapter( mAdapter );
+
+
+        mPredictTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                AutoCompletePlace place = (AutoCompletePlace) parent.getItemAtPosition(position);
+                findPlaceById(place.getId());
+            }
+        });
 
          inti(this);
         //text=(TextView) findViewById(R.id.button);
@@ -61,6 +75,9 @@ public class  GoogleMapObj extends AppCompatActivity implements
     @Override
     public void onConnected(Bundle bundle) {
         mGoogleApiClient.connect();
+        if( mAdapter != null )
+            mAdapter.setGoogleApiClient( mGoogleApiClient );
+
 
     }
 
@@ -101,12 +118,16 @@ public class  GoogleMapObj extends AppCompatActivity implements
     @Override
     protected void onStart() {
         super.onStart();
-
+        if( mGoogleApiClient != null )
+            mGoogleApiClient.connect();
     }
 
     @Override
     protected void onStop() {
-
+        if( mGoogleApiClient != null && mGoogleApiClient.isConnected() ) {
+            mAdapter.setGoogleApiClient( null );
+            mGoogleApiClient.disconnect();
+        }
         super.onStop();
     }
 
@@ -114,20 +135,18 @@ public class  GoogleMapObj extends AppCompatActivity implements
     {
         //text.setText("CurrentLocation");
 
-        PendingResult<PlaceLikelihoodBuffer> result = Places.PlaceDetectionApi
-                .getCurrentPlace(mGoogleApiClient, null);
+        PendingResult<PlaceLikelihoodBuffer> result = Places.PlaceDetectionApi.getCurrentPlace( mGoogleApiClient, null );
         result.setResultCallback(new ResultCallback<PlaceLikelihoodBuffer>() {
             @Override
             public void onResult(PlaceLikelihoodBuffer likelyPlaces) {
-                PlaceLikelihood placeLikelihood=likelyPlaces.get(0);
-                String content="";
-                if(placeLikelihood!=null&&placeLikelihood.getPlace()!=null&&!TextUtils.isEmpty(placeLikelihood.getPlace().getName()))
-                    content="Most likely place:"+placeLikelihood.getPlace().getName()+"\n";
-                if(placeLikelihood!=null)
-                    content+="Percentage : "+(int)(placeLikelihood.getLikelihood()*100)+"%";
+
+                PlaceLikelihood placeLikelihood = likelyPlaces.get(0);
+                String content = "";
+                if (placeLikelihood != null && placeLikelihood.getPlace() != null && !TextUtils.isEmpty(placeLikelihood.getPlace().getName()))
+                    content = "Most likely place: " + placeLikelihood.getPlace().getName() + "\n";
+                if (placeLikelihood != null)
+                    content += "Percent change of being there: " + (int) (placeLikelihood.getLikelihood() * 100) + "%";
                 text.setText(content);
-
-
 
                 likelyPlaces.release();
             }
@@ -159,13 +178,48 @@ public class  GoogleMapObj extends AppCompatActivity implements
 
         if (requestCode == PLACE_PICKER_REQUEST) {
             if (resultCode == RESULT_OK) {
-                Place place = PlacePicker.getPlace(data, this);
-                String toastMsg = String.format("Place: %s", place.getName());
-                Toast.makeText(this, toastMsg, Toast.LENGTH_LONG).show();
-                text.setText(toastMsg);
+                displayPlace( PlacePicker.getPlace( data, this ) );
             }
         }
     }
 
+    private void displayPlace( Place place ) {
+        if( place == null )
+            return;
 
+        String content = "";
+        if( !TextUtils.isEmpty( place.getName() ) ) {
+            content += "Name: " + place.getName() + "\n";
+        }
+        if( !TextUtils.isEmpty( place.getAddress() ) ) {
+            content += "Address: " + place.getAddress() + "\n";
+        }
+        if( !TextUtils.isEmpty( place.getPhoneNumber() ) ) {
+            content += "Phone: " + place.getPhoneNumber();
+        }
+
+        text.setText( content );
+    }
+
+    private void findPlaceById( String id ) {
+        if( TextUtils.isEmpty( id ) || mGoogleApiClient == null || !mGoogleApiClient.isConnected() )
+            return;
+
+        Places.GeoDataApi.getPlaceById( mGoogleApiClient, id ) .setResultCallback(new ResultCallback<PlaceBuffer>() {
+            @Override
+            public void onResult(PlaceBuffer places) {
+
+
+                if (places.getStatus().isSuccess()) {
+                    Place place = places.get(0);
+                    displayPlace(place);
+                    mPredictTextView.setText("");
+                    mAdapter.clear();
+                }
+
+                //Release the PlaceBuffer to prevent a memory leak
+                places.release();
+            }
+        });
+    }
 }
