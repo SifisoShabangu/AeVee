@@ -9,8 +9,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.ViewFlipper;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
@@ -24,6 +28,9 @@ import com.google.android.gms.location.places.PlaceLikelihood;
 import com.google.android.gms.location.places.PlaceLikelihoodBuffer;
 import com.google.android.gms.location.places.Places;
 import com.google.android.gms.location.places.ui.PlacePicker;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Commader on 2015/10/24.
@@ -41,12 +48,24 @@ public class  GoogleMapObj extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_map_object);
+        setContentView(R.layout.main_view);
         text=(TextView) findViewById(R.id.textView);
         mPredictTextView = (AutoCompleteTextView) findViewById( R.id.predicttextview );
         mAdapter = new AutoCompleteAdapter( this );
-        mPredictTextView.setAdapter( mAdapter );
+        mPredictTextView.setAdapter(mAdapter);
 
+        List<String> list1 = new ArrayList<String>();
+        for(int i=0;i<Aevee.ProductList.length;i++)
+        {
+            list1.add(Aevee.ProductList[i]);
+        }
+        ListView lv= (ListView) findViewById(R.id.listView);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+                this,
+                android.R.layout.simple_list_item_1,
+                list1 );
+
+        lv.setAdapter(arrayAdapter);
 
         mPredictTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -56,7 +75,15 @@ public class  GoogleMapObj extends AppCompatActivity implements
             }
         });
 
-         inti(this);
+        inti(this);
+        ListView listView= (ListView) findViewById(R.id.listView);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String yourData = Aevee.ProductList[position];
+                add(yourData);
+            }
+        });
         //text=(TextView) findViewById(R.id.button);
        // text2=(TextView) findViewById(R.id.button2);
     }
@@ -93,6 +120,51 @@ public class  GoogleMapObj extends AppCompatActivity implements
 
     }
 
+    public void Reg(View v)
+    {
+        ViewFlipper Vf=(ViewFlipper)findViewById(R.id.VF);
+        Vf.showNext();
+    }
+    public void Register(View v)
+    {
+        if(Aevee.Current==null)
+            Aevee.Current=new user();
+
+        EditText edtmp=(EditText)findViewById(R.id.name);
+        Aevee.Current.usrname=edtmp.getText()+"";
+        edtmp=(EditText)findViewById(R.id.surname);
+        Aevee.Current.surname=edtmp.getText()+"";
+        edtmp=(EditText)findViewById(R.id.email);
+        Aevee.Current.email=edtmp.getText()+"";
+        edtmp=(EditText)findViewById(R.id.password);
+        Aevee.Current.usrpassword=edtmp.getText()+"";
+        edtmp=(EditText)findViewById(R.id.billingAddress);
+        Aevee.Current.fullAdress.streetName=edtmp.getText()+"";
+        edtmp=(EditText)findViewById(R.id.area);
+        Aevee.Current.fullAdress.city=edtmp.getText()+"";
+        edtmp=(EditText)findViewById(R.id.postalCode);
+        Aevee.Current.fullAdress.code=edtmp.getText()+"";
+        edtmp=(EditText)findViewById(R.id.province);
+        Aevee.Current.fullAdress.Province=edtmp.getText()+"";
+    }
+
+    public void Login(View v)
+    {
+        Luser l=new Luser();
+       EditText edtmp=(EditText)findViewById(R.id.lgn_name);
+        l.usrname=edtmp.getText()+"";
+        edtmp=(EditText)findViewById(R.id.lgn_password);
+        l.usrpassword=edtmp.getText()+"";
+    }
+    public void add(String item) {
+        Aevee.currentlist[Aevee.currentlist.length] = item;
+    }
+    public void Log(View v)
+    {
+        ViewFlipper Vf=(ViewFlipper)findViewById(R.id.VF);
+        Vf.showNext();
+        Vf.showNext();
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

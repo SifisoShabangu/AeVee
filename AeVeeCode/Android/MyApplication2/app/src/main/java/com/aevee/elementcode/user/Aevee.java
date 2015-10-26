@@ -6,4 +6,5 @@ package com.aevee.elementcode.user;
 public class Aevee
 {
     static user Current=null;
+    static int statusBit=0;
 }
