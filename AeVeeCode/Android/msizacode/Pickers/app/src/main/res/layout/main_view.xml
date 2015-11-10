@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="0dp">
+    <ViewFlipper
+        android:id="@+id/VF"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+       <!--Login-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@drawable/mall"
+            >
+            <LinearLayout
+                android:id="@+id/loginCover"
+                android:layout_weight="0.1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="@color/primaryColorTrans"
+                >
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/title"
+                    android:textSize="60dp"
+                    android:layout_marginBottom="50dp"
+                    android:textColor="@color/backgroundColor"
+                    android:layout_height="wrap_content" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:text="@string/name"
+                    android:textSize="30dp"
+                    android:ems="10"
+                    android:id="@+id/lgn_name"
+                    android:textColor="@color/backgroundColor"
+                    android:layout_marginBottom="50dp"
+                    android:layout_gravity="center_horizontal" />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="30dp"
+                    android:text="@string/password"
+                    android:inputType="textPassword"
+                    android:textColor="@color/backgroundColor"
+                    android:ems="10"
+                    android:id="@+id/lgn_password" />
+
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/fab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:clickable="true"
+                    android:src="@drawable/pointer"
+                    android:layout_gravity="right"
+                    android:onClick="Log"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/registerQuoute"
+                    android:textSize="30dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="40dp"
+                    android:textColor="@color/backgroundColor"
+                    android:layout_height="wrap_content"
+                   />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/buttonCover"
+                android:layout_weight="0.9"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="@color/accentColorTrans"
+                android:padding="0dp"
+                >
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/create_account"
+                    android:textSize="20dp"
+                    android:textColor="@color/backgroundColor"
+                    android:background="@color/accentColor"
+                    android:onClick="Reg"/>
+             </LinearLayout>
+        </LinearLayout>
+        <!--Login-->
+        <!--Registration-->
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="vertical" android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <ScrollView
+                android:layout_weight="0.2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName"
+                        android:text="@string/name"
+                        android:ems="10"
+                        android:id="@+id/name"
+                        android:layout_gravity="center_horizontal" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName"
+                        android:text="@string/surname"
+                        android:ems="10"
+                        android:id="@+id/surname"
+                        android:layout_gravity="center_horizontal" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textEmailAddress"
+                        android:text="@string/email"
+                        android:ems="10"
+                        android:id="@+id/email"
+                        android:layout_gravity="center_horizontal" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/password"
+                        android:inputType="textPassword"
+                        android:ems="10"
+                        android:id="@+id/password" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/password"
+                        android:inputType="textPassword"
+                        android:ems="10"
+                        android:id="@+id/repassword" />
+                    <LinearLayout
+                        android:id="@+id/fullAddress"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.5">
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/billingAddress"
+                            android:inputType="text"
+                            android:ems="10"
+                            android:id="@+id/billingAddress" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/city"
+                            android:inputType="text"
+                            android:ems="10"
+                            android:id="@+id/area" />
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/province"
+                            android:inputType="text"
+                            android:ems="10"
+                            android:id="@+id/province" />
+                        <EditText
+                            android:layout_width="170dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/code"
+                            android:inputType="text"
+                            android:ems="10"
+                            android:id="@+id/postalCode" />
+                    </LinearLayout>
+                </LinearLayout>
+            </ScrollView>
+
+
+            <com.getbase.floatingactionbutton.FloatingActionButton
+                xmlns:fab="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/pink_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                fab:fab_colorNormal="@color/accentColor"
+                fab:fab_colorPressed="@color/pink_pressed"
+                fab:fab_icon="@drawable/plus"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="16dp"
+                android:layout_gravity="right"/>
+
+        </LinearLayout>
+        <!--Registration-->
+        <!--MainView-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical" android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.9">
+
+                <ListView
+                    android:id="@+id/listView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:alwaysDrawnWithCache="true"
+                    android:dividerHeight="1dp"
+                    android:horizontalSpacing="3dp"
+                    android:scrollingCache="true"
+                    android:smoothScrollbar="true"
+                    android:stretchMode="columnWidth"
+                    android:verticalSpacing="3dp"
+                    android:layout_marginBottom="0dp"
+                    android:layout_weight="0.1">
+                </ListView>
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/samplemap"
+                android:layout_weight="0.7"></LinearLayout>
+        </LinearLayout>
+
+
+        <!--MainView-->
+
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+            android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            tools:context="com.aevee.elementcode.user.MainActivity"
+            android:layout_weight="0.5">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New Text"
+                android:id="@+id/textView"
+                android:layout_centerHorizontal="true" />
+
+            <AutoCompleteTextView android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:id="@+id/predicttextview"/>
+
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Placepicker"
+                android:id="@+id/button"
+                android:layout_below="@+id/textView"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="99dp"
+                android:onClick="placepicker"
+                />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Currentlocation"
+                android:id="@+id/button2"
+                android:layout_alignBottom="@+id/button"
+                android:layout_alignParentRight="true"
+                android:onClick="currentloc"
+                />
+        </RelativeLayout>
+        <!--List-->
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="vertical" android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+            <ListView
+                android:id="@+id/listView2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:alwaysDrawnWithCache="true"
+                android:dividerHeight="1dp"
+                android:horizontalSpacing="3dp"
+                android:scrollingCache="true"
+                android:smoothScrollbar="true"
+                android:stretchMode="columnWidth"
+                android:verticalSpacing="3dp"
+                android:layout_marginBottom="0dp"
+                android:layout_weight="0.1">
+            </ListView>
+            <TextView
+                android:id="@+id/listCount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:clickable="true"
+                android:src="@drawable/pointer"
+                android:onClick="next"
+                android:layout_gravity="right"
+                />
+
+        </LinearLayout>
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="vertical" android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+        <ListView
+            android:id="@+id/listView3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alwaysDrawnWithCache="true"
+            android:dividerHeight="1dp"
+            android:horizontalSpacing="3dp"
+            android:scrollingCache="true"
+            android:smoothScrollbar="true"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="3dp"
+            android:layout_marginBottom="0dp"
+            android:layout_weight="0.1">
+        </ListView>
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:clickable="true"
+            android:src="@drawable/pointer"
+            android:onClick="confirmlist"
+            android:layout_gravity="right"
+            />
+        </LinearLayout>
+        <!--List-->
+    </ViewFlipper>
+</LinearLayout>
